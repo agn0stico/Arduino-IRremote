@@ -8,6 +8,9 @@
  * Check out the blog post describing the sketch via http://www.analysir.com/blog/2015/11/28/helper-utility-for-troubleshooting-irremote/
  * Version 1.0 November 2015
  * Original Author: AnalysIR - IR software & modules for Makers & Pros, visit http://www.AnalysIR.com
+ *
+ * add MKR1000 and spelling corrections in footer
+ *     beaglesparks - Apr.21.17
  */
 
 
@@ -71,6 +74,11 @@ void dumpTIMER() {
 #ifdef IR_USE_TIMER_TINY0
   Serial.print(F("Timer defined for use: ")); Serial.println(F("Timer_TINY0")); flag = true;
 #endif
+// add MKR1000
+#ifdef IR_USE_TIMER_MKR
+  Serial.print(F("Timer defined for use: ")); Serial.println(F("Timer_MKR")); flag = true;
+#endif
+
 
   if (!flag) {
     Serial.print(F("Timer Error: ")); Serial.println(F("not defined"));
@@ -135,6 +143,9 @@ void dumpPlatform() {
   Serial.println(F("ATtiny84"));
 #elif defined(__AVR_ATtiny85__)
   Serial.println(F("ATtiny85"));
+#elif defined(__SAMD21G18A__) || defined(__SAMD21E17A__)
+  // add MKR1000
+  Serial.println(F("MKR1000"));
 #else
   Serial.println(F("ATmega328(P) / (Duemilanove, Diecimila, LilyPad, Mini, Micro, Fio, Nano, etc)"));
 #endif
@@ -222,9 +233,9 @@ void dumpHeader() {
 void dumpFooter() {
   Serial.println();
   Serial.println(F("Notes: "));
-  Serial.println(F("     - Most of the seetings above can be configured in the following files included as part of the library"));
-  Serial.println(F("     - IRremteInt.h"));
+  Serial.println(F("     - Most of the settings above can be configured in the following files included as part of the library"));
+  Serial.println(F("     - IRremoteInt.h"));
   Serial.println(F("     - IRremote.h"));
   Serial.println(F("     - You can save SRAM by disabling the Decode or Send features for any protocol (Near the top of IRremoteInt.h)"));
-  Serial.println(F("     - Some Timer conflicts, with other libraries, can be easily resolved by configuring a differnt Timer for your platform"));
+  Serial.println(F("     - Some Timer conflicts, with other libraries, can be easily resolved by configuring a different Timer for your platform"));
 }
